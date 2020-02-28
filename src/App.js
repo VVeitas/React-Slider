@@ -24,6 +24,7 @@ class App extends React.Component {
     this.setState({
       x : this.state.x - 100
     });
+    this.reverse;
   }
 
   left = () => {
