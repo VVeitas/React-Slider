@@ -1,0 +1,1 @@
+1. setup babel,webpack: https://www.valentinog.com/blog/babel/
