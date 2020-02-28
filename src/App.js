@@ -10,14 +10,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-       images: [
-         {image: img1, id: 1},
-         {image: img2, id: 2},
-         {image: img3, id: 3},
-         {image: img4, id: 4},
-       ],
-       x: 0,
-     }
+      images: [
+        {image: img1, id: 1},
+        {image: img2, id: 2},
+        {image: img3, id: 3},
+        {image: img4, id: 4},
+      ],
+      x: 0,
+    }
   }
 
   right = () => {
@@ -31,13 +31,17 @@ class App extends React.Component {
   }
 
   reverse = () => {
-    console.log(this.state.images)
-  }
+    if (this.state.x > this.state.images.length){
+      this.setState({
+        x : 0
+      })
+    }
+
 
   render(){
     const x = this.state.x;
     const {images} = this.state;
-    const left = this.reverse;
+    const left = this.left;
     const right = this.right;
 
     return(
