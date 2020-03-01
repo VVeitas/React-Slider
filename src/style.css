@@ -35,7 +35,9 @@ button {
   position: absolute;
   top: 50%;
   z-index: 1;
-  transform: translateY(-50%)
+  transform: translateY(-50%);
+  height: 6%;
+  width: 10%;
 }
 
 .right{
@@ -43,13 +45,19 @@ button {
 }
 
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 700px) {
 
   .slider {
     width: 634px;
     height: 951px;
   }
+}
 
+/*@media all and (max-width: 800px) {
+
+  button {
+    display: none;
+  }
 }
 
 /*@media screen and (min-width: 700px) {
