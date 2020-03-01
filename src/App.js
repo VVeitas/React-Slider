@@ -7,10 +7,10 @@ import img4 from './image4.jpg';
 import img5 from './image5.jpg';
 
 
+
 class App extends React.Component {
   firsttouch = 0;
   movementtouch= 0;
-  lasttouch= 0;
   constructor(props) {
     super(props);
     this.state = {
@@ -22,9 +22,23 @@ class App extends React.Component {
         {image: img5, id: 5},
       ],
       x: 0,
+      width: 0,
     }
   }
 
+
+  componentDidMount = () => {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth });
+  }
 
   left = () => {
     this.setState({
@@ -36,6 +50,7 @@ class App extends React.Component {
         x : (this.state.images.length-1) *-100
       })
     }
+
   }
 
   right = () => {
@@ -61,20 +76,18 @@ class App extends React.Component {
   }
 
   touchend = () => {
-    const mov = this.movementtouch;
-    if (mov < 0) {
+    const mov = this.movementtouch / this.state.width;
+    if (mov <= -0.1) {
       this.right();
     }
-    else {
+    if (mov >= 0.1){
       this.left();
     }
+
+    this.movementtouch = 0;
   }
 
   render(){
-    const {x} = this.state;
-    const {images} = this.state;
-    const left = this.left;
-    const right = this.right;
 
     return(
       <div className="App">
@@ -83,10 +96,10 @@ class App extends React.Component {
       onTouchMove={this.touchmove}
       onTouchEnd={this.touchend}
       >
-      <button onClick={left} > left </button>
-      <button className="right" onClick={right} > right </button>
-      {images.map(img => {
-        return <img key={img.id} src={img.image} style={{transform:`translateX(${x}%)`}} />
+      <button className="left" onClick={this.left}> <div className="button lft"></div></button>
+      <button className="right" onClick={this.right}> <div className="button rht"></div> </button>
+      {this.state.images.map(img => {
+        return <img key={img.id} src={img.image} style={{transform:`translateX(${this.state.x}%)`}} />
       })}
 
       </div>
