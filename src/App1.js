@@ -20,3 +20,19 @@ button {
   margin: 0 15px;
   opacity: 0.6;
 }
+
+.slider {
+  width: 634px;
+  height: 475.5px;
+}
+
+
+{{transform:`translateX(${this.state.x}%)`}}
+
+
+const x = this.state.x +100;
+if (x > 0) {
+  this.setState({
+    x : (this.state.images.length-1) *-100
+  })
+}
