@@ -7,10 +7,9 @@ import img4 from './image4.jpg';
 import img5 from './image5.jpg';
 
 
-
 class App extends React.Component {
-  firsttouch = 0;
-  movementtouch= 0;
+  ftouch = 0;
+  mtouch= 0;
   constructor(props) {
     super(props);
     this.state = {
@@ -24,106 +23,115 @@ class App extends React.Component {
       x: -200,
       width: 0,
       needTransition: 1,
+      direction: "",
+      transitionEnd: 0,
     }
-  }
-
-  handleSliderTranslateEnd = () =>{
-    if (this.state.x == 0){
-      this.setState({
-        x: -500,
-        needTransition: 0,
-      })
-    }
-
-    if (this.state.x == -700){
-      this.setState({
-        x: -200,
-        needTransition: 0,
-      })
-    }
-
-  }
+  };
 
   componentDidMount = () => {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
-    const _images = [
+    const images1 = [
       ...this.state.images.slice(3,5),
       ...this.state.images,
       ...this.state.images.slice(0,2)];
-    this.setState({
-      images : _images
-    });
-
-
-  }
+      this.setState({
+        images : images1
+      });
+      this.setState({
+        transitionEnd:1,
+      })
+    };
 
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.updateWindowDimensions);
-  }
+    };
 
   updateWindowDimensions = () => {
     this.setState({ width: window.innerWidth });
-  }
+    };
 
 
-  //   TranslateX and transition function
+  //   TranslateX and transition styling function switch
   sliderStyle = () => {
     if (this.state.needTransition === 1 ) {
       return {
         transform:`translateX(${this.state.x}%)`,
         transition: "0.4s ease-in-out"
-      };
-    }
+        };
+      }
       return {
-        transform:`translateX(${this.state.x}%)`
+        transform:`translateX(${this.state.x}%)`,
       };
-  }
+    };
 
-
-  left = () => {
+  //  Infinite loop functioning with transitionEnd event handler at slider div
+  handleSliderTranslateEnd = () => {
     this.setState({
-      x : this.state.x + 100,
-      needTransition: 1,
-    });
+      transitionEnd:1,
+    })
+    if (this.state.x == -700) {
+      this.setState ({
+        needTransition: 0,
+        x : -200,
+      })
+    };
+    if (this.state.x == 0) {
+      this.setState ({
+        needTransition: 0,
+        x : -500,
+      })}
+    };
 
-  }
+  //  Left and right functions for both swipes and onclick event handlers
+  left = () => {
+    if(this.state.transitionEnd == 1){
+      this.setState({
+        x : this.state.x + 100,
+        needTransition: 1,
+        transitionEnd: 0
+      })}
+    };
 
   right = () => {
-    console.log(this.state.x)
-    this.setState({
-      x : this.state.x - 100,
-      needTransition: 1,
-    });
-
-    if (this.state.x === -700){
+    if(this.state.transitionEnd == 1){
       this.setState({
-        x: 0
+        x : this.state.x - 100,
+        needTransition: 1,
+        transitionEnd: 0
+      })}
+    };
+
+  //  Indicator buttons functioning: go to slide X
+  indicatorsHandler = (item) =>{
+      const _item = item.id
+      this.setState({
+        x : (_item + 1) * -100,
+        needTransition: 1,
       })
     }
-  }
 
 
-  //  Swipes for mobile phones
+  //  Swipe functions for mobile phones
   touchstart = e => {
-    this.firsttouch = e.nativeEvent.touches[0].clientX;
+    this.ftouch = e.nativeEvent.touches[0].clientX;
   }
 
   touchmove = e => {
     const delta =  e.nativeEvent.touches[0].clientX;
-    this.movementtouch = delta - this.firsttouch;
+    this.mtouch = delta - this.ftouch;
   }
 
   touchend = () => {
-    const mov = this.movementtouch / this.state.width;
+    const mov = this.mtouch / this.state.width;
     if (mov <= -0.1) {
       this.right();
     }
     if (mov >= 0.1){
       this.left();
     }
-    this.movementtouch = 0;
-  }
+    this.mtouch = 0;
+    }
 
   render(){
     const style = this.sliderStyle
@@ -135,24 +143,31 @@ class App extends React.Component {
       onTouchMove={this.touchmove}
       onTouchEnd={this.touchend}
       >
-      <button className="left button lft" onClick={this.left}>
+      <button className="left button" onClick={this.left}>
       </button>
-      <button className="right button rht" onClick={this.right}>
+      <button className="right button" onClick={this.right}>
       </button>
-      {this.state.images.map((img, index) => {
-        return <img
-        className="img"
-        key={index}
-        src={img.image}
-        style={this.sliderStyle()}
-        onTransitionEnd={this.handleSliderTranslateEnd}
-         />
-      })}
+      <ul>
+      {this.state.images.map((item,index) => {
+        if (index > 1 &&  index < 7) {
+          return <li
+            className="indicators"
+            key={index}
+            onClick={() => this.indicatorsHandler(item)}
+              > </li>}
+            })}
+      </ul>
+        {this.state.images.map((img, index) => {
+          return <img
+          className="img"
+          key={index}
+          src={img.image}
+          style={this.sliderStyle()}
+          onTransitionEnd={this.handleSliderTranslateEnd}
+          /> })}
+          </div>
+          </div>
+            );
+          }};
 
-      </div>
-      </div>
-    );
-  }
-}
-
-export default App
+        export default App
