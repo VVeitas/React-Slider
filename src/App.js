@@ -23,10 +23,29 @@ class App extends React.Component {
       x: -200,
       width: 0,
       needTransition: 1,
-      direction: "",
       transitionEnd: 0,
     }
-  };
+  }
+
+  //  Left and right functions for both swipes and onclick event handlers
+  left = () => {
+    if(this.state.transitionEnd == 1){
+      this.setState({
+        x : this.state.x + 100,
+        needTransition: 1,
+        transitionEnd: 0
+      })}
+    };
+
+  right = () => {
+    if(this.state.transitionEnd == 1){
+      this.setState({
+        x : this.state.x - 100,
+        needTransition: 1,
+        transitionEnd: 0
+      })}
+    };
+
 
   componentDidMount = () => {
     this.updateWindowDimensions();
@@ -56,16 +75,22 @@ class App extends React.Component {
   sliderStyle = () => {
     if (this.state.needTransition === 1 ) {
       return {
-        transform:`translateX(${this.state.x}%)`,
-        transition: "0.4s ease-in-out"
+        transform : `translateX(${this.state.x}%)`,
+        WebkitTransform : `translateX(${this.state.x}%)`,
+        MozTransform : `translateX(${this.state.x}%)`,
+        WebkitTransition : "0.4s ease-in-out",
+        MozTransition : "0.4s ease-in-out",
         };
       }
       return {
-        transform:`translateX(${this.state.x}%)`,
+        transform : `translateX(${this.state.x}%)`,
+        WebkitTransform : `translateX(${this.state.x}%)`,
+        MozTransform : `translateX(${this.state.x}%)`,
       };
     };
 
-  //  Infinite loop functioning with transitionEnd event handler at slider div
+
+  //  Infinite loop functioning using transitionEnd event handler at slider div
   handleSliderTranslateEnd = () => {
     this.setState({
       transitionEnd:1,
@@ -83,36 +108,17 @@ class App extends React.Component {
       })}
     };
 
-  //  Left and right functions for both swipes and onclick event handlers
-  left = () => {
-    if(this.state.transitionEnd == 1){
-      this.setState({
-        x : this.state.x + 100,
-        needTransition: 1,
-        transitionEnd: 0
-      })}
-    };
-
-  right = () => {
-    if(this.state.transitionEnd == 1){
-      this.setState({
-        x : this.state.x - 100,
-        needTransition: 1,
-        transitionEnd: 0
-      })}
-    };
-
-  //  Indicator buttons functioning: go to slide X
+    //  Indicator buttons function: go to slide X
   indicatorsHandler = (item) =>{
-      const _item = item.id
+      const item1 = item.id
       this.setState({
-        x : (_item + 1) * -100,
+        x : (item1 + 1) * -100,
         needTransition: 1,
       })
     }
 
 
-  //  Swipe functions for mobile phones
+  //  Swipe function for mobile phones. Tolerance set to 10%.
   touchstart = e => {
     this.ftouch = e.nativeEvent.touches[0].clientX;
   }
@@ -136,7 +142,7 @@ class App extends React.Component {
   render(){
     const style = this.sliderStyle
     return(
-      <div className="App">
+      <div className="app">
 
       <div className="slider"
       onTouchStart={this.touchstart}
@@ -159,7 +165,6 @@ class App extends React.Component {
       </ul>
         {this.state.images.map((img, index) => {
           return <img
-          className="img"
           key={index}
           src={img.image}
           style={this.sliderStyle()}
