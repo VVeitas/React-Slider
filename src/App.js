@@ -23,7 +23,7 @@ class App extends React.Component {
       x: -200,
       width: 0,
       needTransition: 1,
-      transitionEnd: 0,
+      transitionEnd: 1,
     }
   }
 
@@ -57,9 +57,6 @@ class App extends React.Component {
       this.setState({
         images : images1
       });
-      this.setState({
-        transitionEnd:1,
-      })
     };
 
   componentWillUnmount = () => {
@@ -119,16 +116,16 @@ class App extends React.Component {
 
 
   //  Swipe function for mobile phones. Tolerance set to 10%.
-  touchstart = e => {
+  touchStart = e => {
     this.ftouch = e.nativeEvent.touches[0].clientX;
   }
 
-  touchmove = e => {
-    const delta =  e.nativeEvent.touches[0].clientX;
-    this.mtouch = delta - this.ftouch;
+  touchMove = e => {
+    const mov =  e.nativeEvent.touches[0].clientX;
+    this.mtouch = mov - this.ftouch;
   }
 
-  touchend = () => {
+  touchEnd = () => {
     const mov = this.mtouch / this.state.width;
     if (mov <= -0.1) {
       this.right();
@@ -145,9 +142,9 @@ class App extends React.Component {
       <div className="app">
 
       <div className="slider"
-      onTouchStart={this.touchstart}
-      onTouchMove={this.touchmove}
-      onTouchEnd={this.touchend}
+      onTouchStart={this.touchStart}
+      onTouchMove={this.touchMove}
+      onTouchEnd={this.touchEnd}
       >
       <button className="left button" onClick={this.left}>
       </button>
@@ -165,11 +162,11 @@ class App extends React.Component {
       </ul>
         {this.state.images.map((img, index) => {
           return <img
-          key={index}
-          src={img.image}
-          style={this.sliderStyle()}
-          onTransitionEnd={this.handleSliderTranslateEnd}
-          /> })}
+            key={index}
+            src={img.image}
+            style={this.sliderStyle()}
+            onTransitionEnd={this.handleSliderTranslateEnd}
+            /> })}
           </div>
           </div>
             );
