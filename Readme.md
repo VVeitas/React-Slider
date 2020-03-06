@@ -1,6 +1,6 @@
 
 
-# React-Slider Custom Component
+# React-Slider custom component
  Created using only core react dependencies and webpack/babel environment. Slider is compatible with both mobiles and desktop devices. As this app setup instructions will focus only on React part, CSS styling will be skipped. This projects CSS code and images can be found at _/src_ folder.
 
 ## Slider Properties
@@ -10,7 +10,7 @@
 - [Indicator buttons (go to slide X)](https://github.com/VVeitas/React-Slider#indicator-buttons)
 - [Swipe support for mobile phones](https://github.com/VVeitas/React-Slider#swipe-function)
 
-## Layout preparation
+## Layout Preparation
 At this point you should have your react, webpack and babel environment prepared. If not, see this [React Webpack and Babel setup](https://github.com/VVeitas/React-Slider#swipe-function).
 
 Till now our files should look like this:
@@ -194,7 +194,7 @@ right = () => {
     })}};
 ```
 
-## Infinite loop
+## Infinite Loop
 To implement infinite option, we will slice the last two array objects and put it in the front of the array, and then we will slice first two array objects and put it in end of the array. So now our array will contain 9 objects.
 
 Lets add Reacts lifecycle function __componentDidMount__ next to other functions, that will slice our array on the launch of the component.
@@ -292,7 +292,7 @@ indicatorsHandler = (item) =>{
     })};
 ```
 
-## Swipe function
+## Swipe Function
 For swipes, lets set __slider__ div elements event handlers like this:
 
 ```ruby
