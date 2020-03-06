@@ -1,6 +1,6 @@
 
 
-# React-Slider custom component
+# React-Slider
  Created using only core react dependencies and webpack/babel environment. Slider is compatible with both mobiles and desktop devices. As this app setup instructions will focus only on React part, CSS styling will be skipped. This projects CSS code and images can be found at _/src_ folder.
 
 ## Slider Properties
