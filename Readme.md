@@ -8,7 +8,7 @@
 - [Left and Right functions](https://github.com/VVeitas/React-Slider#left-and-right-buttons)
 - [Infinite slider](https://github.com/VVeitas/React-Slider#infinite-loop)
 - [Indicator buttons (go to slide X)](https://github.com/VVeitas/React-Slider#indicator-buttons)
-- [Swipe support for mobile phones](https://www.valentinog.com/blog/babel/)
+- [Swipe support for mobile phones](https://github.com/VVeitas/React-Slider#swipe-function)
 
 ## Layout preparation
 At this point you should have your react, webpack and babel environment prepared. If not, see this [React Webpack and Babel setup](https://github.com/VVeitas/React-Slider#swipe-function).
