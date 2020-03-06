@@ -46,7 +46,7 @@ class App extends React.Component {
       })}
     };
 
-
+  //  Slicing array on components mount. Getting current inner-screen size width
   componentDidMount = () => {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
@@ -171,4 +171,4 @@ class App extends React.Component {
             );
           }};
 
-        export default App
+    export default App
