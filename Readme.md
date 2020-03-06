@@ -4,14 +4,14 @@
  Created using only core react dependencies and webpack/babel environment. Slider is compatible with both mobiles and desktop devices. As this app setup instructions will focus only on React part, CSS styling will be skipped. This projects CSS code and images can be found at _/src_ folder.
 
 ## Slider Properties
-- Layout preparation
-- Left and Right functions
-- Infinite slider
-- Indicator buttons (go to slide X)
-- Swipe support for mobile phones
+- [Layout preparation](https://github.com/VVeitas/React-Slider#layout-preparation)
+- [Left and Right functions](https://github.com/VVeitas/React-Slider#left-and-right-buttons)
+- [Infinite slider](https://github.com/VVeitas/React-Slider#infinite-loop)
+- [Indicator buttons (go to slide X)](https://github.com/VVeitas/React-Slider#indicator-buttons)
+- [Swipe support for mobile phones](https://www.valentinog.com/blog/babel/)
 
 ## Layout preparation
-At this point you should have your react, webpack and babel environment prepared. If not, see this [React Webpack and Babel setup](https://www.valentinog.com/blog/babel/).
+At this point you should have your react, webpack and babel environment prepared. If not, see this [React Webpack and Babel setup](https://github.com/VVeitas/React-Slider#swipe-function).
 
 Till now our files should look like this:
 
