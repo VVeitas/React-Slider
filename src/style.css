@@ -26,7 +26,7 @@ body {
 @media all and (min-width: 700px) {
 
   .slider {
-    width: 796px;
+    width: 794px;
     height: 595.5px;
   }
 }
@@ -34,6 +34,7 @@ body {
 img{
   width: 50%;
   height: 100%;
+  flex-shrink: 0;
 }
 
 button {
@@ -63,6 +64,10 @@ button:hover {
 button:focus {
   outline: none;
   border: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 @media all and (max-width: 500px) {

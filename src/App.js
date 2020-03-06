@@ -75,6 +75,7 @@ class App extends React.Component {
         transform : `translateX(${this.state.x}%)`,
         WebkitTransform : `translateX(${this.state.x}%)`,
         MozTransform : `translateX(${this.state.x}%)`,
+        transition : "0.4s ease-in-out",
         WebkitTransition : "0.4s ease-in-out",
         MozTransition : "0.4s ease-in-out",
         };
@@ -137,10 +138,8 @@ class App extends React.Component {
     }
 
   render(){
-    const style = this.sliderStyle
     return(
       <div className="app">
-
       <div className="slider"
       onTouchStart={this.touchStart}
       onTouchMove={this.touchMove}
